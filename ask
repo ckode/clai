@@ -1,0 +1,58 @@
+#!/usr/bin/env -S uv run  --script
+#####!/usr/bin/env python
+
+###################################
+# clai
+#
+# This is a program called ask.
+##################################
+
+
+import logging
+import aiohttp
+import sys
+import json
+import os
+import asyncio
+
+from dotenv import load_dotenv
+from rich.console import Console
+from rich.markdown import Markdown
+
+
+async def send_to_ai(ai_question: json):
+    async with aiohttp.ClientSession() as session:
+        async with session.post(WEBHOOK, json=ai_question, ssl=False) as response:
+            if response.status == 200:
+                data = await response.json()
+                answer = Markdown(data[0]['output'])
+                console = Console()
+                console.print(answer)
+            else:
+                print(f"AI webhook status: {response.status}")
+
+
+async def main():
+    question = ' '.join(sys.argv[1:]) 
+    ai_question = json.loads(JSON_PAYLOAD)
+    ai_question['chatInput'] = question
+    ai_question['sessionId'] = SESSION_ID
+
+    await send_to_ai(ai_question)
+
+
+if __name__ == '__main__':
+    load_dotenv(os.path.expanduser('~/.env/.ask.env'))
+    DEPLOYMENT = os.getenv('DEPLOYMENT').upper()
+    JSON_PAYLOAD = os.getenv('JSON_PAYLOAD')
+    SESSION_ID = os.getenv('SESSION_ID')
+
+    if DEPLOYMENT == 'TEST':
+       WEBHOOK = os.getenv('N8N_TEST_WEBHOOK')
+    elif DEPLOYMENT == "PROD":
+       WEBHOOK = os.getenv('N8N_PROD_WEBHOOK')
+    else:
+       print("Deployment environment variable is not set or incorrect.")
+       sys.exit(1)
+    
+    asyncio.run(main())
