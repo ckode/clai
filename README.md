@@ -77,8 +77,7 @@ N8N_PROD_WEBHOOK="https://[N8N_HOST]/webhook/yadda-yadda"
 # Do not touch the JSON_PAYLOAD, it is a template.
 JSON_PAYLOAD='{"sessionId": "", "action": "sendMessage", "chatInput": ""}'
 # The session ID (uuid works) should be unquie as it is used to manage ai chat history.
-SESSION_ID='CLI-AI'
-#SESSION_ID='yadda-yadda-yadda-yadda-batman!'
+SESSION_ID='yadda-yadda-yadda-yadda-batman!'
 ```
 I highly recommend if you use .env files like this, you protect them.
 ```
