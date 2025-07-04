@@ -54,7 +54,7 @@ It requires a few environmental variables.  You can either set them yourself, or
 config file.
 
 Currently, this one is set to HOME/.env/.ask.env and you MUST update the "ask" script to point at your
-env file.  I've utulized os.path.expanduser so that the path can use a ~ for home.
+env file if you use one.  I've utulized os.path.expanduser so that the path can use a ~ for home.
 
 ```
 snip...
