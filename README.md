@@ -47,6 +47,8 @@ To do this, you do not use python at the top of the script, instead you do the f
 ```
 #!/usr/bin/env -S uv run  --script
 ```
+It also supports Markdown (Python Rich library) since LLMs are known to provide responses that can have markdown in them.
+
 ## Environmental Variables
 It requires a few environmental variables.  You can either set them yourself, or use an environmental
 config file.
