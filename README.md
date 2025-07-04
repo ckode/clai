@@ -53,7 +53,20 @@ It also supports Markdown (Python Rich library) since LLMs are known to provide 
 It requires a few environmental variables.  You can either set them yourself, or use an environmental
 config file.
 
-Currently, this one is set to HOME/.env/.ask.env
+Currently, this one is set to HOME/.env/.ask.env and you MUST update the "ask" script to point at your
+env file.  I've utulized os.path.expanduser so that the path can use a ~ for home.
+
+```
+snip...
+from dotenv import load_dotenv
+from rich.console import Console
+from rich.markdown import Markdown
+
+CLAI_ENV = os.path.expanduser('~/.env/.ask.env')   <---- Update this to point to your env file.
+snip...
+```
+
+This is an example of the env file.
 Example:
 ```
 # DEPLOYMENT TEST/PROD  This determines which WEBHOOK to use basedon the deployment's state
