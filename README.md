@@ -47,6 +47,17 @@ To do this, you do not use python at the top of the script, instead you do the f
 ```
 #!/usr/bin/env -S uv run  --script
 ```
+It will work just fine with the above when in the git repo directory, but if you move "ask" 
+to a bin directory, it will choke on not having dependencies.   To resolve that issue, we add
+a dependencies section to the above as you see below.
+```
+#!/usr/bin/env -S uv run  --script
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["aiohttp", "dotenv", "rich"]
+# ///
+```
 It also supports Markdown (Python Rich library) since LLMs are known to provide responses that can have markdown in them.
 
 ## Environmental Variables
